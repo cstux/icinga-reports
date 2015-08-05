@@ -45,7 +45,7 @@
   name1,
   name2,
   objecttype_id,
-  ifnull(icinga_availability(
+  coalesce(icinga_availability(
     objects.object_id,
     $P{p_date_start},
     $P{p_date_end}
@@ -59,7 +59,7 @@ SELECT
   name1,
   name2,
   objecttype_id,
-  ifnull(icinga_availability(
+  coalesce(icinga_availability(
     objects.object_id,
     $P{p_date_start},
     $P{p_date_end}

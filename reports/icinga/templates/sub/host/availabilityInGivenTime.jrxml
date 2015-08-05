@@ -20,7 +20,7 @@
   name1,
   name2,
   '0' AS state,
-  ifnull(icinga_availability(
+  coalesce(icinga_availability(
     objects.object_id,
     $P{p_date_start},
     $P{p_date_end}
@@ -33,7 +33,7 @@ SELECT
   name1,
   name2,
   '1' as state,
-  (100 - ifnull(icinga_availability(
+  (100 - coalesce(icinga_availability(
     objects.object_id,
     $P{p_date_start},
     $P{p_date_end}
@@ -64,7 +64,7 @@ WHERE objects.object_id = $P{p_host_object_id}]]>
 		<![CDATA[select name1,
   address,
   service_object_id,
-  timestampdiff(second, $P{p_date_start}, $P{p_date_end}) as period
+  datediff('seconds',$P{p_date_start}::timestamp,$P{p_date_end}::timestamp) as period
 from icinga_objects,
   icinga_hosts,
   icinga_services

@@ -120,7 +120,7 @@
 	<parameter name="p_host_name" class="java.lang.String"/>
 	<parameter name="p_timeperiod_id" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[SELECT name2, timestampdiff(second, $P{p_date_start}, $P{p_date_end}) AS period
+		<![CDATA[SELECT name2, datediff('second',$P{p_date_start}::timestamp, $P{p_date_end}::timestamp) AS period
 FROM icinga_objects, icinga_services, icinga_hosts
 WHERE icinga_objects.object_id  = icinga_services.service_object_id
 AND icinga_hosts.host_object_id = icinga_services.host_object_id

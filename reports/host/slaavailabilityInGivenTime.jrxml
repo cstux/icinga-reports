@@ -56,7 +56,7 @@
 		<![CDATA[select name1,
   address,
   service_object_id,
-  timestampdiff(second, $P{p_date_start}, $P{p_date_end}) as period
+  datediff('second',$P{p_date_start}::timestamp, $P{p_date_end}::timestamp) AS period
 from icinga_objects,
   icinga_hosts,
   icinga_services

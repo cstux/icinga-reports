@@ -42,7 +42,7 @@
 logentry_data,
 entry_time
 FROM icinga_logentries
-WHERE date_format(entry_time,'%W') BETWEEN $P{p_weekday_start} AND $P{p_weekday_end}
+WHERE extract(dow from entry_time)::text BETWEEN $P{p_weekday_start} AND $P{p_weekday_end}
 AND entry_time BETWEEN $P{p_time_start} AND $P{p_time_end}
 ORDER BY entry_time]]>
 		</queryString>
